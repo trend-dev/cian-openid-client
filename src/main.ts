@@ -3,10 +3,8 @@ import url from "url";
 import { Issuer, generators } from "openid-client";
 import { config } from "./config";
 
-if (!config.authority)
-  throw "No config file found! Just create config.ts file from example.config.ts";
-const code_verifier = generators.codeVerifier();
-const code_challenge = generators.codeChallenge(code_verifier);
+const codeVerifier = generators.codeVerifier();
+const codeChallenge = generators.codeChallenge(codeVerifier);
 
 const PORT = 4200;
 
@@ -26,8 +24,8 @@ async function requestHandler(
       // id_token_signed_response_alg: "PS512",
     });
 
-    const queryUrl = <string>request.url;
-    const myUrl = url.parse(queryUrl);
+    const queryUrl = request.url;
+    const myUrl = url.parse(<string>queryUrl);
     const searchParams = new URLSearchParams(<string>myUrl.query);
     const code = searchParams.get("code");
 
@@ -35,7 +33,7 @@ async function requestHandler(
       // Get authorization code
       let authUrl = client.authorizationUrl({
         scope: config.scope,
-        code_challenge: code_challenge,
+        code_challenge: codeChallenge,
         response_types: config.response_type,
         redirect_uri: config.redirect_uri,
         code_challenge_method: "S256",
@@ -54,7 +52,6 @@ async function requestHandler(
       console.log("validated ID Token claims %j", tokenSet.claims());
 
       response.writeHead(200);
-      //   let json = JSON.stringify(userinfo);
       response.end();
     }
   } catch (err) {
