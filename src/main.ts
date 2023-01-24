@@ -39,7 +39,7 @@ async function requestHandler(
         code_challenge_method: "S256",
       });
 
-      response.writeHead(302, {
+      response.writeHead(301, {
         Location: authUrl,
       });
       response.end();
