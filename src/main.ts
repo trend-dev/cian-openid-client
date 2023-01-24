@@ -21,6 +21,7 @@ async function requestHandler(
       client_secret: config.client_secret,
       redirect_uris: [config.redirect_uri],
       response_types: [config.response_type],
+      post_logout_redirect_uris: [config.post_logout_redirect_uri],
       // id_token_signed_response_alg: "PS512",
     });
 
