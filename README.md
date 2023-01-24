@@ -2,8 +2,8 @@
 
 #### Установка/запуск
 
-1. Установить пакеты `npm i`. _Версия node v16.15.0_
-2. Создать файл config.ts из example.config.ts и заполнить
+1. Установить npm пакеты `npm i`. _Версия node v16.15.0_
+2. Создать файл src/config.ts из example.config.ts и заполнить
 3. Запуск с nodemon
 
 ```
